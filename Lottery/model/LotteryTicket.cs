@@ -6,6 +6,9 @@ namespace Lottery.model
 {
     class LotteryTicket
     {
+        /// <summary>
+        /// a string consisting of 6 random numbers
+        /// </summary>
         public string lotteryNumber { get; set; }
 
         public LotteryTicket()
