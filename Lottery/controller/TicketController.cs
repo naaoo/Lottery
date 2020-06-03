@@ -21,8 +21,16 @@ namespace Lottery.controller
                 }
                 else
                 {
-                    Console.WriteLine("Another guess? (y/n)");
-                    string next = Console.ReadLine().ToLower();
+                    string next = "";
+                    while (next != "y" && next != "n")
+                    {
+                        Console.WriteLine("Another guess? (y/n)");
+                        next = Console.ReadLine().ToLower();
+                        if (next != "y" && next != "n")
+                        {
+                            Console.WriteLine("Please enter 'y' or 'n'");
+                        }
+                    }
                     if (next == "n")
                     {
                         play = false;
@@ -36,32 +44,39 @@ namespace Lottery.controller
         {
             Console.WriteLine("Please guess a 6-figure number:");
             string guess = Console.ReadLine();
-            string correctGuess = "";
-            Boolean correct = true;
-            for (int i = 0; i < ticket.lotteryNumber.Length; i++)
+            if (guess.Length != 6)
             {
-                char charG = guess[i];
-                char charT = ticket.lotteryNumber[i];
-                if (charG == charT)
-                {
-                    correctGuess = correctGuess + charG;
-                }
-                else
-                {
-                    correctGuess = correctGuess + "*";
-                    correct = false;
-                }
-            }
-            if (correct == true)
-            {
-                return true;
+                Console.WriteLine("Not a 6-figure number...");
+                return false;
             }
             else
             {
-                Console.WriteLine("Your correct numbers\n" + correctGuess);
-                return false;
+                string correctGuess = "";
+                Boolean correct = true;
+                for (int i = 0; i < ticket.lotteryNumber.Length; i++)
+                {
+                    char charG = guess[i];
+                    char charT = ticket.lotteryNumber[i];
+                    if (charG == charT)
+                    {
+                        correctGuess = correctGuess + charG;
+                    }
+                    else
+                    {
+                        correctGuess = correctGuess + "*";
+                        correct = false;
+                    }
+                }
+                if (correct == true)
+                {
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Your correct numbers\n" + correctGuess);
+                    return false;
+                }
             }
         }
-
     }
 }
